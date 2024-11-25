@@ -382,4 +382,27 @@ export class AppService {
       throw new InternalServerErrorException('Internal Server Error');
     }
   }
+
+  async deleteProblem(problemId: string) {
+    try {
+      const problem = await this.prisma.problem.delete({
+        where: {
+          id: problemId,
+        },
+      });
+
+      await this.prisma.submission.deleteMany({
+        where: {
+          problemId: problemId,
+        },
+      });
+
+      return problem;
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException('Internal Server Error');
+    }
+
+  }
+
   }

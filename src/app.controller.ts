@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 
@@ -84,5 +84,10 @@ export class AppController {
     },
   ) {
     return this.appService.submitCode(data);
+  }
+
+  @Delete("/deleteProblem")
+  async deleteProblem(@Query("problemId") problemId: string) {
+    return this.appService.deleteProblem(problemId);
   }
 }
