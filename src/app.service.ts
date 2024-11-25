@@ -31,6 +31,8 @@ export class AppService {
         TestCasesWithId.push({ ...problem.testCases[i], id: id });
       }
 
+      
+
       const newProblem = await this.prisma.problem.create({
         data: {
           description: problem.description,
@@ -365,7 +367,11 @@ export class AppService {
       const problem = await this.prisma.problem.findUnique({
         where: {
           id: problemId,
+        
         },
+       include:{
+      
+       }
       });
 
       if (!problem) throw new InternalServerErrorException('Problem Not Found');
